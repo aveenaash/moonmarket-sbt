@@ -13,6 +13,8 @@ import json._
 object RestController extends RestHelper {
     
      serve {
-        case JsonGet("api" :: "moonmarket" :: _, _) => JString("purchase successful.")
+        case JsonGet("api" :: "moonmarket" :: _, _) => 
+	        val builder = new ZazzercodeRequestBuilder
+		builder.executeQuery("Prayag")
      }       
 }

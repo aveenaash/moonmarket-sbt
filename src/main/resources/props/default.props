@@ -1,0 +1,6 @@
+#Properties in this file will be read when running in dev mode
+db.dialect=org.hibernate.dialect.MySQL5Dialect
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://localhost/moonmarket
+db.user=root
+db.password=mysql55
