@@ -8,13 +8,13 @@ import collection.JavaConversions._
   * @author : prayagupd
   */
 
-object ZazzercodeRequestBuilder {
+class ZazzercodeRequestBuilder {
 
-  def executeQuery(query_: String) : String {
+  def executeQuery(q : String) : String = {
     val node = nodeBuilder().client(true).node()
     val client = node.client()
 
-    val query = queryString(query_)
+    val query = queryString(q)
     val response = client
       .prepareSearch("gccount")
       .setTypes("Customer")
@@ -24,7 +24,7 @@ object ZazzercodeRequestBuilder {
 
     val hits = response.getHits
 
-    println("Found %d hits for query '%s'".format(hits.getTotalHits, query_))
+    println("Found %d hits for query '%s'".format(hits.getTotalHits, q))
     println()
 
     hits.getHits.foreach(hit =>
@@ -37,4 +37,7 @@ object ZazzercodeRequestBuilder {
     return hits.getTotalHits+""
   }
 
+  def execute() : String = {
+    return "purchase successful"
+  }
 }

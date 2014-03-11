@@ -1,4 +1,10 @@
 
+compile
+-------------
+
+```
+$./sbt compile
+```
 run-app
 ---------
 

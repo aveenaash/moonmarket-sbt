@@ -1,4 +1,4 @@
-package moonmarket
+package zazzercode
 
 import net.liftweb._
 import common._
@@ -15,6 +15,7 @@ object RestController extends RestHelper {
      serve {
         case JsonGet("api" :: "moonmarket" :: _, _) => 
 	        val builder = new ZazzercodeRequestBuilder
-		builder.executeQuery("Prayag")
+		//JString(builder.executeQuery("Prayag"))
+		JString(builder.execute())
      }       
 }

@@ -14,7 +14,7 @@ import mapper._
 import code.model._
 import net.liftmodules.JQueryModule
 
-import moonmarket.RestController
+import zazzercode.RestController
 
 /**
  * A class that's instantiated early and run.  It allows the application
