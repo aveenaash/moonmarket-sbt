@@ -8,7 +8,7 @@ import collection.JavaConversions._
   * @author : prayagupd
   */
 
-class ZazzercodeRequestBuilder {
+class ZazzercodeRequestBuilder extends AbstractRequestBuilder {
 
   def executeQuery(q : String) : String = {
     val node = nodeBuilder().client(true).node()

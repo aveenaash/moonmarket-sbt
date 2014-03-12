@@ -29,7 +29,7 @@ libraryDependencies ++= {
     "org.specs2"        %% "specs2"             % "1.14"             % "test",
     "mysql"             %  "mysql-connector-java" % "5.1.12",
     "com.h2database"    % "h2"                  % "1.3.167", 
-    "org.elasticsearch" % "elasticsearch"       % "0.90.3"
+    "org.elasticsearch" % "elasticsearch"       % "1.0.0"
   )
 }
 
