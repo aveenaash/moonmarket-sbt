@@ -19,14 +19,14 @@ class ZazzercodeRequestBuilder extends AbstractRequestBuilder {
 
   def executeQuery(q : String) : String = {
     
-    val client = getClient()
+    val client = ElasticsearchManager.getClient()
     val termQueryBuilder     = QueryBuilders.termQuery("firstName", q)
     val matchAllQueryBuilder = QueryBuilders.matchAllQuery()
     println("Query => " + matchAllQueryBuilder)
 
     val response = client
-      .prepareSearch("gccount") //TODO define a Constants class
-      .setTypes("Customer")
+      .prepareSearch(Constants.EsIndex) //TODO define a Constants class
+      .setTypes(Constants.EsTypeCustomer)
       .setQuery(termQueryBuilder)
       .execute()
       .actionGet()
@@ -50,13 +50,4 @@ class ZazzercodeRequestBuilder extends AbstractRequestBuilder {
     return "purchase successful"
   }
 
-  //TODO move this method to a generic class, Let's call it ElasticsearchManager
-  //TODO make a DSL for serverconf (EsServer.scala)
-  def getClient() : TransportClient = {
-    //create Es Client
-    val settings = ImmutableSettings.settingsBuilder().put("cluster.name", "moonmarket").build();
-    val transportClient = new TransportClient(settings);
-    transportClient.addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
-    return transportClient;
-  }
 }
