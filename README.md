@@ -1,27 +1,32 @@
 
-compile
+1. compile and run-app
 -------------
 
 ```
 $./sbt compile
 ```
-run-app
----------
 
 ```
 $./sbt
 >container:start
 ```
 
-es indexing
+2.1 es indexing
 ---------------
 
 https://github.com/iPrayag/gccount/tree/master/scripts
 
-check api
+2.2 check api
 ---------------
 ```
 $ curl http://localhost:8080/api/moonmarket
+```
+
+3. start RabbitMQ
+---------------
+
+```
+prayagupd@prayagupd:~/backup/JVM/rabbitmq_server-3.2.4$ sbin/rabbitmq-server
 ```
 
 References
