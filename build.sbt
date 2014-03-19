@@ -37,7 +37,8 @@ libraryDependencies ++= {
     "org.elasticsearch"       % "elasticsearch"           % "1.0.0",
     //"com.google.protobuf"     % "protobuf-java"           % "2.5.0",
     "net.sandrogrzicic"       %% "scalabuff-runtime"      % "1.3.7",
-    "com.rabbitmq"            %  "amqp-client"            % "2.8.1"
+    "com.rabbitmq"            %  "amqp-client"            % "2.8.1",
+    "net.liftmodules"         %% "amqp_2.5"               % "1.3"
   )
 }
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <title>::moonchat::</title>
+  </head>
+ 
+  <body data-lift-content-id="main">
+    <div id="main" data-lift="surround?with=default;at=content">
+      <!-- the behavior of the div -->
+      <div data-lift="comet?type=Chat"> 
+        chat messages (in between earth and moon)
+        <ul>
+          <li>A message</li>
+          <li class="clearable">Another message</li>
+          <li class="clearable">A third message</li>
+        </ul>
+      </div>
+    
+      <div>
+        <form data-lift="form.ajax">
+          <input data-lift="ChatIn" id="chat_in"/>
+          <input type="submit" value="Speak to your friends in moon..."/>
+        </form>
+      </div>
+    </div>
+  </body>
+
+</html>
+

@@ -16,6 +16,10 @@ import net.liftmodules.JQueryModule
 
 import zazzercode.RestController
 
+import net.liftmodules.amqp.AMQPAddListener
+import code.comet.ChatServer
+import code.comet.Rabbit.RemoteReceiver
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -45,7 +49,7 @@ class Boot {
     // Build SiteMap
     def sitemap = SiteMap(
       Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
-
+      Menu("Comet Chat") / "chat",
       // more complex because this menu allows anything in the
       // /static path to be visible
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
@@ -88,5 +92,7 @@ class Boot {
 
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
+
+    RemoteReceiver ! AMQPAddListener(ChatServer)
   }
 }
