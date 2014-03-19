@@ -31,6 +31,6 @@ object ChatIn {
    */
   def render = SHtml.onSubmit(s => {
     ChatServer ! s
-    SetValById("chat_in", "")
+    SetValById("chatIn", "")
   })
 }

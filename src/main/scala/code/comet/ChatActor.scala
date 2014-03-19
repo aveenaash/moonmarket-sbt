@@ -11,7 +11,7 @@ import Helpers._
  * by this component.  When the component changes on the server
  * the changes are automatically reflected in the browser.
  */
-class Chat extends CometActor with CometListener {
+class ChatActor extends CometActor with CometListener {
   private var msgs: Vector[String] = Vector() // private state
 
   /**

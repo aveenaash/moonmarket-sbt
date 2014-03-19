@@ -16,7 +16,7 @@ object Rabbit {
   val durable = true
   val autoAck = false
 
-  object RemoteSend extends AMQPSender[String](factory, exchange, routing) {
+  object RemoteSender extends AMQPSender[String](factory, exchange, routing) {
     def configure(channel: Channel) =
       channel.exchangeDeclare(exchange, "fanout", durable)
   }
