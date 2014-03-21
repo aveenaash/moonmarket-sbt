@@ -1,5 +1,6 @@
 package zazzercode
 
+import scala.collection.mutable.MutableList
 import org.elasticsearch.client.Client
 import org.elasticsearch.client.transport.TransportClient
 import org.elasticsearch.common.settings.ImmutableSettings
@@ -25,7 +26,7 @@ class ZazzercodeRequestBuilder extends AbstractRequestBuilder {
     println("Query => " + matchAllQueryBuilder)
 
     val response = client
-      .prepareSearch(Constants.EsIndex) //TODO define a Constants class
+      .prepareSearch(Constants.EsIndex)
       .setTypes(Constants.EsTypeCustomer)
       .setQuery(termQueryBuilder)
       .execute()
@@ -44,6 +45,36 @@ class ZazzercodeRequestBuilder extends AbstractRequestBuilder {
     client.close()
 
     return hits.getTotalHits+""
+  }
+
+  def getCustomers(q : String) : List[String] = {
+    
+    val names = List[String]()
+    val client = ElasticsearchManager.getClient()
+    val termQueryBuilder     = QueryBuilders.termQuery("firstName", q)
+    val matchAllQueryBuilder = QueryBuilders.matchAllQuery()
+    println("Query => " + matchAllQueryBuilder)
+
+    val response = client
+      .prepareSearch(Constants.EsIndex)
+      .setTypes(Constants.EsTypeCustomer)
+      .setQuery(matchAllQueryBuilder)
+      .execute()
+      .actionGet()
+
+    val searchHits = response.getHits 
+    
+    println("Found %d hits for query '%s'".format(searchHits.getTotalHits, q))
+    println()
+
+    searchHits.getHits.foreach(searchHit =>
+      searchHit.sourceAsMap()("firstName")+"" :: names
+      //println("* %s".format(searchHit.sourceAsMap()("firstName")))
+    )
+
+    client.close()
+
+    return names
   }
 
   def execute() : String = {

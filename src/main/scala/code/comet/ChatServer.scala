@@ -1,5 +1,5 @@
 package code
-package comet//zazzercode
+package comet
 
 import net.liftweb._
 import http._
@@ -7,12 +7,17 @@ import actor._
 import net.liftmodules.amqp.AMQPMessage
 import code.comet.Rabbit.RemoteSender
 
+import zazzercode.ZazzercodeRequestBuilder
+
 /**
  * A singleton that provides chat features to all clients.
  * It's an Actor so it's thread-safe because only one
  * message will be processed at once.
  */
 object ChatServer extends LiftActor with ListenerManager {
+  //TODO load previous chat messages
+  //val builder = new ZazzercodeRequestBuilder()
+  //private var msgs = builder.getCustomers("Prayag")
   private var msgs = Vector("Welcome to comet powered moonchat.") // private state
 
   /**

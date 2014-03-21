@@ -34,7 +34,7 @@ object RestController extends RestHelper {
                 val documents_ = Map("customerId" -> "1", 
 		       "firstName" -> "Prayag1", 
 		       "lastName" -> "Upd")
-		JString(service.insertDocuments(documents_))
+		JString(service.insertDocuments(documents_)+"")
      }
 
 }
