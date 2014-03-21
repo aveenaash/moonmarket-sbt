@@ -3,11 +3,13 @@ package code.comet//zazzercode
 import net.liftmodules.amqp._
 import com.rabbitmq.client._
 
+import zazzercode.Constants
+
 object Rabbit {
 
   val factory = new ConnectionFactory {
     import ConnectionFactory._
-    setHost("127.0.0.1")
+    setHost(Constants.RabbitServerHost)
     setPort(DEFAULT_AMQP_PORT)
   }
 

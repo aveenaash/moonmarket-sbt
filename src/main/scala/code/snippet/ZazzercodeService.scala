@@ -39,4 +39,7 @@ class ZazzercodeService {
      }
 */
 
+    def insertDocuments(documents : Map[String, String]) = {
+        ElasticsearchManager.insertDocuments(documents, Constants.EsIndex, Constants.EsTypeCustomer)
+    }
 }

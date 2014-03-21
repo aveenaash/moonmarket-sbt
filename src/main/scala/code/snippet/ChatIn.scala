@@ -29,8 +29,8 @@ object ChatIn {
    * to the ChatServer and then returns JavaScript which
    * clears the input.
    */
-  def render = SHtml.onSubmit(s => {
-    ChatServer ! s
+  def render = SHtml.onSubmit(messageFromClient => {
+    ChatServer ! messageFromClient
     SetValById("chatIn", "")
   })
 }

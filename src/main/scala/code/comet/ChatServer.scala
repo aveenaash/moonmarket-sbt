@@ -30,7 +30,7 @@ object ChatServer extends LiftActor with ListenerManager {
    * messages, and then update all the listeners.
    */
   override def lowPriority = {
-    case AMQPMessage(s: String) => msgs :+= s; updateListeners()
-    case s: String => RemoteSender ! AMQPMessage(s)
+    case AMQPMessage(messageFromClient: String) => msgs :+= messageFromClient; updateListeners()
+    case messageFromClient: String => RemoteSender ! AMQPMessage(messageFromClient)
   }
 }

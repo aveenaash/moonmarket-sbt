@@ -28,6 +28,13 @@ object RestController extends RestHelper {
                 //JsonResponse(
 	        //  ("tweets" -> service.tweets()) 
 	        //)
+
+	case JsonGet("api" :: "chat" ::  _, _) =>
+		val service = new ZazzercodeService
+                val documents_ = Map("customerId" -> "1", 
+		       "firstName" -> "Prayag1", 
+		       "lastName" -> "Upd")
+		JString(service.insertDocuments(documents_))
      }
 
 }
