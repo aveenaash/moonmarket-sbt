@@ -38,7 +38,11 @@ libraryDependencies ++= {
     //"com.google.protobuf"     % "protobuf-java"           % "2.5.0",
     "net.sandrogrzicic"       %% "scalabuff-runtime"      % "1.3.7",
     "com.rabbitmq"            %  "amqp-client"            % "2.8.1",
-    "net.liftmodules"         %% "amqp_2.5"               % "1.3"
+    "net.liftmodules"         %% "amqp_2.5"               % "1.3", 
+    "org.scalanlp" % "breeze_2.10" % "0.7",
+    // native libraries are not included by default. add this if you want them (as of 0.7)
+    // native libraries greatly improve performance, but increase jar sizes.
+    "org.scalanlp" % "breeze-natives_2.10" % "0.7"
   )
 }
 
