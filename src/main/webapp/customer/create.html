@@ -1,0 +1,12 @@
+<div data-lift="lift:surround?with=default;at=content">
+  <h2 class="alt">New Customer</h2>
+	<div data-lift="CustomerController.create?form=post">
+	  <span id="hidden"></span>
+	  <table>
+	      <tr><td>ID</td><td>        <input id="id" type="text"/>       </td></tr>
+	      <tr><td>First Name</td><td><input id="firstName" type="text"/></td></tr>
+	      <tr><td>Last Name </td><td><input id="lastName"  type="text"/></td></tr>
+	   </table>
+    <input id="submit" type="submit" value="Save to Elasticsearch"/> <br /> <br />
+	</div>
+</div>
