@@ -35,6 +35,7 @@ libraryDependencies ++= {
     "mysql"                   %  "mysql-connector-java"   % "5.1.12",
     "com.h2database"          % "h2"                      % "1.3.167", 
     "org.elasticsearch"       % "elasticsearch"           % "1.0.0",
+    "com.fasterxml.jackson.core" % "jackson-databind"     % "2.1.3",
     //"com.google.protobuf"     % "protobuf-java"           % "2.5.0",
     "net.sandrogrzicic"       %% "scalabuff-runtime"      % "1.3.7",
     "com.rabbitmq"            %  "amqp-client"            % "2.8.1",
@@ -42,7 +43,8 @@ libraryDependencies ++= {
     "org.scalanlp" % "breeze_2.10" % "0.7",
     // native libraries are not included by default. add this if you want them (as of 0.7)
     // native libraries greatly improve performance, but increase jar sizes.
-    "org.scalanlp" % "breeze-natives_2.10" % "0.7"
+    "org.scalanlp" % "breeze-natives_2.10" % "0.7",
+    "net.databinder.dispatch" %% "dispatch-core" % "0.11.0"
   )
 }
 
@@ -50,4 +52,4 @@ libraryDependencies ++= {
 //object build extends Build {
 //	  lazy val root = Project("main", file("."), settings = Defaults.defaultSettings ++ scalabuffSettings).configs(ScalaBuff)
 //}
-
+port in container.Configuration := 8082

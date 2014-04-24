@@ -1,0 +1,56 @@
+
+<div data-lift="lift:surround?with=default;at=content">
+  <h2 class="alt">Hulaki</h2>
+
+
+    <!--This is ajax proceesing-->
+    <!--<form data-lift="form.ajax">-->
+	<!--<div data-lift="HulakiController">-->
+	  <!--<span id="hidden"></span>-->
+	  <!--<table>-->
+	      <!--<tr><td>Request Id</td><td>        <input name="requestid" type="text"/>       </td></tr>-->
+	      <!--<tr><td>Request   </td><td>        <input name="request" type="text"/>         </td></tr>-->
+	      <!--<tr><td>Response </td><td>         <textarea name="response"></textarea>       </td></tr>-->
+	   <!--</table>-->
+    <!--<input id="submit" type="submit"/> <br /> <br />-->
+    <!--</div>-->
+    <!--</form>-->
+
+    <!--<div id="response"></div>-->
+
+
+    <!--This is plain form proceesing-->
+    <!--<form data-lift="HulakiController" method="post">-->
+        <!--<table>-->
+        <!--<tr><td>Request Id</td><td>        <input name="requestid" type="text"/>       </td></tr>-->
+        <!--<tr><td>Request   </td>-->
+        <!--<td>-->
+               <!--<input name="request" type="text"/>-->
+                <!---->
+
+        <!--</td></tr>-->
+        <!--<tr><td>Response </td><td>         <textarea name="response"></textarea>       </td></tr>-->
+        <!--</table>-->
+        <!--<input name="submit" type="submit" value="Go"/> <br /> <br />-->
+    <!--</form>-->
+
+    <form data-lift="form.ajax">
+    <div data-lift="HulakiController">
+        <span id="hidden"></span>
+    <table>
+        <tr><td>Request Id</td><td>        <input name="requestid" type="text"/>       </td></tr>
+        <tr><td>Request   </td>
+            <td>
+                <input name="request" type="text"/>
+                <input name="processreq" type="submit" value="Process Request"/>
+
+            </td></tr>
+        <tr><td>Response </td><td>         <textarea id="response" name="response"></textarea>       </td></tr>
+    </table>
+    <input name="submit" type="submit" value="Go"/> <br /> <br />
+    </div>
+    </form>
+
+
+
+</div>
