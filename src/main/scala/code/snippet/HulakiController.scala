@@ -51,26 +51,23 @@ class HulakiController extends Loggable {
       val responsedoc=Map("response" -> responseString,
         "responseId" -> "1")
 
-      //      var  map : util.Map[String, String]= new util.HashMap[String, String]()
-      //      map.put("requestId", requestid)
-      //      map.put("request",request)
 
-      //println("Response : "+hulaki.response.response)
       ElasticsearchManager.insertResponseRecord(requestdoc,responsedoc,"gccount","Api")
       SetHtml("response", Text("Response is saved...."))
     }
 
     def processRequest() : JsCmd = {
-      val svc = url("http://localhost:8082/api/tweets")
+      val svc = url(request)
+      //val svc = url("http://localhost:8082/api/tweets")
       val country = Http(svc OK as.String)
 
-
+      var resp = "";
       for (c <- country) {
-        println(c)
-
+        resp = c
       }
+      Thread.sleep(1000)
 
-      SetHtml("response", Text(request))
+      SetHtml("response", Text(resp+""))
     }
     //      SetHtml("response", Text(request))
 
