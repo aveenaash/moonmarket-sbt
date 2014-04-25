@@ -135,30 +135,6 @@ POST http://localhost:9200/gccount/Customer/_search
 AGGREGATOR
 
 << must_not
-GET http://localhost:9200/gccount/Api/_search
-{
-  "size":1,
-   "query": {
-      "filtered": {
-         "filter": {
-            "bool": {
-               "must_not": [
-                  {
-                     "term": {
-                        "module": "A"
-                     }
-                  }
-               ]
-            }
-         }
-      }
-   },
-   "sort": {
-      "requestId": {
-         "order": "desc"
-      }
-   }
-}
-    
+
 must_not
 
