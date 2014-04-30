@@ -13,7 +13,8 @@ scalaVersion := "2.10.0"
 
 resolvers ++= Seq("snapshots"     at "http://oss.sonatype.org/content/repositories/snapshots",
                   "staging"       at "http://oss.sonatype.org/content/repositories/staging",
-                  "releases"      at "http://oss.sonatype.org/content/repositories/releases"
+                  "releases"      at "http://oss.sonatype.org/content/repositories/releases", 
+		  "Java.net Maven2 Repository"     at "http://download.java.net/maven/2/"
                  )
 
 seq(webSettings :_*)
@@ -43,8 +44,9 @@ libraryDependencies ++= {
     "org.scalanlp" % "breeze_2.10" % "0.7",
     // native libraries are not included by default. add this if you want them (as of 0.7)
     // native libraries greatly improve performance, but increase jar sizes.
-    "org.scalanlp" % "breeze-natives_2.10" % "0.7",
-    "net.databinder.dispatch" %% "dispatch-core" % "0.11.0"
+    "org.scalanlp"            % "breeze-natives_2.10" % "0.7",
+    "net.databinder.dispatch" %% "dispatch-core" % "0.11.0", 
+    "net.liftmodules"         %% "fobo_2.5"      % "1.2"
   )
 }
 

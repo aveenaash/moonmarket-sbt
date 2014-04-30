@@ -12,7 +12,8 @@ import Loc._
 import mapper._
 
 import code.model._
-import net.liftmodules.JQueryModule
+//import net.liftmodules.JQueryModule
+import net.liftmodules.{FoBo, JQueryModule}
 
 import zazzercode.RestController
 
@@ -42,6 +43,22 @@ class Boot {
     // you don't need to use Mapper to use Lift... use
     // any ORM you want
     Schemifier.schemify(true, Schemifier.infoF _, User)
+
+    // FoBo init params 
+    // https://github.com/karma4u101/FoBo-Demo/blob/master/fobo-lift-template-demo/src/main/scala/bootstrap/liftweb/Boot.scala
+    FoBo.InitParam.JQuery=FoBo.JQuery191 //1102
+    FoBo.InitParam.ToolKit=FoBo.Foundation215
+    FoBo.InitParam.ToolKit=FoBo.PrettifyJun2011
+    FoBo.InitParam.ToolKit=FoBo.JQueryMobile110
+    FoBo.InitParam.ToolKit=FoBo.DataTables190
+    FoBo.InitParam.ToolKit=FoBo.Knockout210
+    FoBo.InitParam.ToolKit=FoBo.Bootstrap232
+    FoBo.InitParam.ToolKit=FoBo.FontAwesome321
+    FoBo.InitParam.ToolKit=FoBo.AngularJS1211      //The core files 
+    FoBo.InitParam.ToolKit=FoBo.AJSUIBootstrap020 //Angular UI Bootstrap
+    FoBo.InitParam.ToolKit=FoBo.AJSNGGrid204      //Angular NG-Grid    
+    FoBo.InitParam.ToolKit=FoBo.Pace0415
+    FoBo.init()  
 
     // where to search snippet
     LiftRules.addToPackages("code")
