@@ -1,46 +1,19 @@
-<div data-lift="lift:surround?with=default;at=content">
+
+<link data-lift="head" rel="stylesheet" type='text/css' href="/classpath/fobo/bootstrap.css"/>
+<link data-lift="head" rel="stylesheet" type='text/css' href="/classpath/fobo/bootstrap-responsive.css"/>
+<link data-lift="head" rel="stylesheet" href="/classpath/fobo/font-awesome.css">
+
+<div id="fobo-main" class="lift:surround?with=libo/default;at=content">
   <h2 class="alt">Hulaki</h2>
-
-
-    <!--This is ajax proceesing-->
-    <!--<form data-lift="form.ajax">-->
-	<!--<div data-lift="HulakiController">-->
-	  <!--<span id="hidden"></span>-->
-	  <!--<table>-->
-	      <!--<tr><td>Request Id</td><td>        <input name="requestid" type="text"/>       </td></tr>-->
-	      <!--<tr><td>Request   </td><td>        <input name="request" type="text"/>         </td></tr>-->
-	      <!--<tr><td>Response </td><td>         <textarea name="response"></textarea>       </td></tr>-->
-	   <!--</table>-->
-    <!--<input id="submit" type="submit"/> <br /> <br />-->
-    <!--</div>-->
-    <!--</form>-->
-
-    <!--<div id="response"></div>-->
-
-
-    <!--This is plain form proceesing-->
-    <!--<form data-lift="HulakiController" method="post">-->
-        <!--<table>-->
-        <!--<tr><td>Request Id</td><td>        <input name="requestid" type="text"/>       </td></tr>-->
-        <!--<tr><td>Request   </td>-->
-        <!--<td>-->
-               <!--<input name="request" type="text"/>-->
-                <!---->
-
-        <!--</td></tr>-->
-        <!--<tr><td>Response </td><td>         <textarea name="response"></textarea>       </td></tr>-->
-        <!--</table>-->
-        <!--<input name="submit" type="submit" value="Go"/> <br /> <br />-->
-    <!--</form>-->
 
     <form data-lift="form.ajax">
     <div data-lift="HulakiController">
         <span id="hidden"></span>
     <table>
-        <tr><td>Request Id</td><td>        <input name="requestid" type="text"/>       </td></tr>
-        <tr><td>Request   </td>
+        <tr><td>Module</td><td>        <input name="requestid" type="text" style='width:40em'/>       </td></tr>
+        <tr><td>HTTP Request   </td>
             <td>
-                <input name="request" type="text"/>
+                <input name="request" type="text" style='width:40em'/>
                 <input name="processreq" type="submit" value="Process Request"/>
 
             </td></tr>
@@ -49,9 +22,6 @@
     <input name="submit" type="submit" value="Go"/> <br /> <br />
     </div>
     </form>
-
-
-
 </div>
 
 <script type="text/javascript"
