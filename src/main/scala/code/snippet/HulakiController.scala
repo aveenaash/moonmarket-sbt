@@ -1,10 +1,14 @@
 package code.snippet
 
 import net.liftweb.util.Helpers._
+import net.liftweb.util.CssSel
 import net.liftweb.http.SHtml.{text,textarea,ajaxSubmit}
 import net.liftweb.http.SHtml
-import net.liftweb.http.js.JsCmd
 import net.liftweb.http.js.JsCmds.SetHtml
+import net.liftweb.http.js.JsCmds.Run
+import net.liftweb.http.js.JsCmds.Script
+import net.liftweb.http.js.JsCmd
+import net.liftweb.http.js.JE.{JsFunc, JsRaw}
 import net.liftweb.common.Loggable
 import xml.Text
 import net.liftweb.http.S
@@ -31,7 +35,6 @@ class HulakiController extends Loggable {
       val responsedoc = Map("response"   -> responseString,
                             "responseId" -> "1")
 
-
       ElasticsearchManager.insertResponseRecord(requestdoc, responsedoc, "gccount", "Api")
 
       SetHtml("response", Text("Response is saved...."))
@@ -49,6 +52,9 @@ class HulakiController extends Loggable {
       Thread.sleep(1000)
 
       SetHtml("response", Text(resp+""))
+      // Run("$('#response').html('resp')")
+      // val command_ = JsFunc("format").cmd
+      // "*" #> Script(command_)
     }
 
 

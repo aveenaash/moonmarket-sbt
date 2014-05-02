@@ -1,4 +1,4 @@
-
+<body>
 <link data-lift="head" rel="stylesheet" type='text/css' href="/classpath/fobo/bootstrap.css"/>
 <link data-lift="head" rel="stylesheet" type='text/css' href="/classpath/fobo/bootstrap-responsive.css"/>
 <link data-lift="head" rel="stylesheet" href="/classpath/fobo/font-awesome.css">
@@ -17,18 +17,24 @@
                 <input class="btn btn-primary" name="processreq" type="submit" value="Process Request"/>
 
             </td></tr>
-        <tr><td>Response </td><td>         <textarea id="response" name="response" style="width: 840px; height: 450px;"></textarea>       </td></tr>
+	    <tr><td>Response </td><td>         
+			    <textarea id="response" name="response" style="width: 840px; height: 450px;">
+				    <lift:comet type="JsonCometActor" name="Other">
+				        <resp:message>json</resp:message>
+		                    </lift:comet>
+			    </textarea>       
+	    </td></tr>
     </table>
     <input class="btn btn-primary" name="submit" type="submit" value="Go"/> <br /> <br />
     </div>
     </form>
 </div>
 
-<script type="text/javascript"
-        src="/js/jquery-1.11.0.min.js" id="jquery">
+<script id="jquery" src="/classpath/jquery.js" type="text/javascript">
 
-    function FormatJSON(oData, sIndent) {
-        if (arguments.length < 2) {
+    function formatJSON(oData) {
+       var sIndent = 4; 
+       if (arguments.length < 2) {
             var sIndent = "";
         }
         var sIndentStyle = "    ";
@@ -97,12 +103,18 @@
 
         // return
         return sHTML;
-    }
+    };
 
-    $( document ).ready(function() {
-        var myFormattedString = FormatJSON( $('#response').text() )
-        alert(myFormattedString)
-        $('#response').text = myFormattedString
-    })
+    $('#response').on('change keyup paste', function() {
+         format();
+    });
 
-</script>
+    function format(){
+        console.log("prayagupd")
+        var j = formatJSON( $('#response').val() )
+        $('#response').text = j
+    });
+
+</script>		    
+
+</body>
