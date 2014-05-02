@@ -1,25 +1,26 @@
 
-1. compile and run-app
--------------
+1. configure mysql/ compile and run-app
+-----------------------------
 
 ```
-$./sbt compile
-```
-
-```
-$./sbt
+$./run-app.sh
+>compile
 >container:start
 ```
 
-2.1 es indexing
----------------
+2.1 [es indexing](https://github.com/iPrayag/moonmarket-sbt/tree/master/scripts)
+--------------------------------------------------------------------------------
 
-https://github.com/iPrayag/gccount/tree/master/scripts
+```
+$./esBoostrap.sh
+$ cd scripts
+$./bootstrap.sh
+```
 
 2.2 check api
 ---------------
 ```
-$ curl http://localhost:8080/api/moonmarket
+$ curl http://localhost:8080/api/tweets
 ```
 
 3. start RabbitMQ

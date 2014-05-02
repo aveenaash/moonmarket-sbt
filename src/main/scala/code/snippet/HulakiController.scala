@@ -54,7 +54,7 @@ class HulakiController extends Loggable {
       SetHtml("response", Text(resp+""))
       // Run("$('#response').html('resp')")
       // val command_ = JsFunc("format").cmd
-      // "*" #> Script(command_)
+      // "#response" #> Script(command_)
     }
 
 
