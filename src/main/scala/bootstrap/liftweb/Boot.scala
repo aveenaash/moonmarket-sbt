@@ -71,6 +71,7 @@ class Boot {
       Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
       Menu("Comet Chat") / "chat",
       Menu("Customer") / "customer/create",
+      Menu("Customer>Edit") / "customer/edit",
       Menu("Hulaki") / "hulaki/hulaki",
       Menu("Market") / "market",
       // more complex because this menu allows anything in the
