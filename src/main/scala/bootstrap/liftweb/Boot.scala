@@ -25,6 +25,7 @@ import code.comet.Rabbit.RemoteReceiver
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
+
 class Boot {
   def boot {
     if (!DB.jndiJdbcConnAvailable_?) {
@@ -60,6 +61,8 @@ class Boot {
     FoBo.InitParam.ToolKit=FoBo.Pace0415
     FoBo.init()  
 
+    LiftRules.useXhtmlMimeType = false
+
     // where to search snippet
     LiftRules.addToPackages("code")
 
@@ -69,7 +72,7 @@ class Boot {
       Menu("Comet Chat") / "chat",
       Menu("Customer") / "customer/create",
       Menu("Hulaki") / "hulaki/hulaki",
-      Menu("Simple Form") / "Form",
+      Menu("Market") / "market",
       // more complex because this menu allows anything in the
       // /static path to be visible
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 

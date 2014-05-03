@@ -14,9 +14,11 @@ scalaVersion := "2.10.0"
 resolvers ++= Seq("snapshots"     at "http://oss.sonatype.org/content/repositories/snapshots",
                   "staging"       at "http://oss.sonatype.org/content/repositories/staging",
                   "releases"      at "http://oss.sonatype.org/content/repositories/releases", 
-		  "Java.net Maven2 Repository"     at "http://download.java.net/maven/2/"
+		  "Java.net Maven2 Repository"     at "http://download.java.net/maven/2/", 
+		  "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
                  )
 
+//earldouglas/xsbt-web-plugin
 seq(webSettings :_*)
 
 unmanagedResourceDirectories in Test <+= (baseDirectory) { _ / "src/main/webapp" }

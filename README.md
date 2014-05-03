@@ -6,6 +6,7 @@
 $./run-app.sh
 >compile
 >container:start
+>~ ;copy-resources;aux-compile
 ```
 
 2.1 [es indexing](https://github.com/iPrayag/moonmarket-sbt/tree/master/scripts)

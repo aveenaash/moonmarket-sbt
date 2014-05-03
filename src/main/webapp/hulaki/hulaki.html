@@ -3,6 +3,11 @@
 <link data-lift="head" rel="stylesheet" type='text/css' href="/classpath/fobo/bootstrap-responsive.css"/>
 <link data-lift="head" rel="stylesheet" href="/classpath/fobo/font-awesome.css">
 
+<style>
+	#request  { white-space: pre; font-family: monospace; font-size:12px ; color : green}
+	#response { white-space: pre; font-family: monospace; font-size:11px ; color : blue}
+</style>
+
 <div id="fobo-main" class="lift:surround?with=libo/default;at=content">
   <h2 class="alt">Hulaki</h2>
 
@@ -13,16 +18,13 @@
         <tr><td>Module</td><td>        <input name="requestid" type="text" style='width:60em'/>       </td></tr>
         <tr><td>HTTP Request   </td>
             <td>
-                <input name="request" type="text" style='width:60em'/>
+                <input name="request" id="request" type="text" style='width:60em'/>
                 <input class="btn btn-primary" name="processreq" type="submit" value="Process Request"/>
 
             </td></tr>
 	    <tr><td>Response </td><td>         
 			    <textarea id="response" name="response" style="width: 840px; height: 450px;">
-				    <lift:comet type="JsonCometActor" name="Other">
-				        <resp:message>json</resp:message>
-		                    </lift:comet>
-			    </textarea>       
+			    </textarea>
 	    </td></tr>
     </table>
     <input class="btn btn-primary" name="submit" type="submit" value="Go"/> <br /> <br />
@@ -30,91 +32,28 @@
     </form>
 </div>
 
-<script id="jquery" src="/classpath/jquery.js" type="text/javascript">
+<script id="jquery" src="/classpath/jquery.js" type="text/javascript"></script>
 
-    function formatJSON(oData) {
-       var sIndent = 4; 
-       if (arguments.length < 2) {
-            var sIndent = "";
-        }
-        var sIndentStyle = "    ";
-        var sDataType = RealTypeOf(oData);
-
-        // open object
-        if (sDataType == "array") {
-            if (oData.length == 0) {
-                return "[]";
-            }
-            var sHTML = "[";
-        } else {
-            var iCount = 0;
-            $.each(oData, function() {
-                iCount++;
-                return;
-            });
-            if (iCount == 0) { // object is empty
-                return "{}";
-            }
-            var sHTML = "{";
-        }
-
-        // loop through items
-        var iCount = 0;
-        $.each(oData, function(sKey, vValue) {
-            if (iCount > 0) {
-                sHTML += ",";
-            }
-            if (sDataType == "array") {
-                sHTML += ("\n" + sIndent + sIndentStyle);
-            } else {
-                sHTML += ("\n" + sIndent + sIndentStyle + "\"" + sKey + "\"" + ": ");
-            }
-
-            // display relevant data type
-            switch (RealTypeOf(vValue)) {
-                case "array":
-                case "object":
-                    sHTML += FormatJSON(vValue, (sIndent + sIndentStyle));
-                    break;
-                case "boolean":
-                case "number":
-                    sHTML += vValue.toString();
-                    break;
-                case "null":
-                    sHTML += "null";
-                    break;
-                case "string":
-                    sHTML += ("\"" + vValue + "\"");
-                    break;
-                default:
-                    sHTML += ("TYPEOF: " + typeof(vValue));
-            }
-
-            // loop
-            iCount++;
-        });
-
-        // close object
-        if (sDataType == "array") {
-            sHTML += ("\n" + sIndent + "]");
-        } else {
-            sHTML += ("\n" + sIndent + "}");
-        }
-
-        // return
-        return sHTML;
-    };
+<script type="text/javascript">
+// <![CDATA[
 
     $('#response').on('change keyup paste', function() {
+	console.log("[info] : response keyup")
          format();
     });
 
     function format(){
-        console.log("prayagupd")
-        var j = formatJSON( $('#response').val() )
-        $('#response').text = j
-    });
+        var json = $( '#response' ).val()
+        var j = JSON.stringify( JSON.parse(json) , null, 4)
+        console.log("[info] : formattng json" + j)
+        $('#response').html(j)
+    };
 
+    $(document).ready(function(){
+        console.log("[info] : hulaki js is ready.")
+   });
+
+//]]>
 </script>		    
 
 </body>
