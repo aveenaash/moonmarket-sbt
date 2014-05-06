@@ -1,5 +1,8 @@
 package code.snippet
 
+import scala.concurrent.{ future, promise }
+import scala.concurrent.ExecutionContext.Implicits.global
+import dispatch._
 import net.liftweb.util.Helpers._
 import net.liftweb.util.CssSel
 import net.liftweb.http.SHtml.{text,textarea,ajaxSubmit}
@@ -14,10 +17,9 @@ import xml.Text
 import net.liftweb.http.S
 import net.liftweb.common._
 import zazzercode.ElasticsearchManager
-import dispatch._, Defaults._
 import org.elasticsearch.client.transport.TransportClient
 import java.util
-
+import net.liftweb.actor.LAFuture
 
 class HulakiController extends Loggable {
 
@@ -41,20 +43,34 @@ class HulakiController extends Loggable {
     }
 
     def processRequest() : JsCmd = {
-      val svc = url(request)
-      //val svc = url("http://localhost:8082/api/tweets")
-      val country = Http(svc OK as.String)
+	    
+      val future_ : LAFuture[String] = new LAFuture()
+
+      val urlRequest = url(request)
+      // val http = new Http with thread.Safety
+      val future = Http(urlRequest OK as.String)
 
       var resp = "";
-      for (c <- country) {
-        resp = c
-      }
-      Thread.sleep(1000)
+      //for (f <- future) {
+      //  resp = f
+      //}
 
-      SetHtml("response", Text(resp+""))
-      // Run("$('#response').html('resp')")
-      // val command_ = JsFunc("format").cmd
-      // "#response" #> Script(command_)
+      future onSuccess {
+	      case json =>
+		resp = json
+		logger.info(s"[onSuccess] response => ${json}")
+                SetHtml("response", Text(resp+"")) //FIXME
+		logger.info(s"[onSuccess] response => ${json}")
+
+      }
+
+      future onFailure {
+	      case exception => 
+	        logger.info(s"${exception.getMessage()}")
+      }
+      Thread.sleep(2000)
+      logger.info("[outside] response => ${resp}")
+      SetHtml("response", Text(resp))
     }
 
 
