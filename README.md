@@ -1,4 +1,6 @@
 
+![rajesh-hamal](https://github.com/iPrayag/moonmarket-sbt/raw/master/rajeshhamal.jpg)
+
 1. configure mysql/ compile and run-app
 -----------------------------
 
