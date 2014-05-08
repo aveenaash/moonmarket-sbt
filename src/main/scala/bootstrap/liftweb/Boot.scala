@@ -68,12 +68,13 @@ class Boot {
 
     // Build SiteMap
     def sitemap = SiteMap(
-      Menu.i("Home") / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
-      Menu("Comet Chat") / "chat",
-      Menu("Customer") / "customer/create",
-      Menu("Customer>Edit") / "customer/edit",
-      Menu("Hulaki") / "hulaki/hulaki",
-      Menu("Market") / "market",
+      Menu.i("Home")             / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
+      Menu("Comet Moon Chat")    / "chat",
+      Menu("Moon Customer")      / "customer/create",
+      Menu("Moon Customer>Edit") / "customer/edit",
+      Menu("Hulaki")             / "hulaki/hulaki",
+      Menu("Hulaki list")        / "hulaki/list",
+      Menu("Moon Market")        / "market",
       // more complex because this menu allows anything in the
       // /static path to be visible
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
