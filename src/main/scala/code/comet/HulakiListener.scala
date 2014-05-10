@@ -33,7 +33,7 @@ class HulakiListener extends CometActor with CometListener {
   def registerWith = HulakiListenerManager
 
   private def sendMessage(msg: String) = 
-	  HulakiListenerManager ! "prayagupd says : " + msg
+	  HulakiListenerManager ! msg
 
   /**
    * The CometActor is an Actor, so it processes messages.
@@ -55,8 +55,8 @@ class HulakiListener extends CometActor with CometListener {
    * Put the messages in the li elements and clear
    * any elements that have the clearable class.
    */
-  def render = bind("chat", "input" -> ajaxForm(SHtml.text("", sendMessage _)),
-                         "messages" -> renderMessages)
+  def render = bind("json", "input"    -> ajaxForm(SHtml.text("", sendMessage _)),
+                            "response" -> renderMessages)
 
 
 }

@@ -10,12 +10,15 @@
 
  <lift:comet type="HulakiListener" name="none" >
   <div>
+	  <p>Request Url</p>
+	  <json:input />
+  </div>
+   <div>
 	<ul>
-            <chat:messages/>
+            <json:response/>
         </ul>
   </div>
-  <chat:input />
-  </lift:comet>
+ </lift:comet>
 
  </div>
  </body>
