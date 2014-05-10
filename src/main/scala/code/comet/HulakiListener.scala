@@ -11,6 +11,7 @@ import net.liftweb.http.js.JsCmds.Run
 import net.liftweb.http.js.JsCmds.Script
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.js.JE.{JsFunc, JsRaw}
+import xml.Text
 
 import code.model.JsonMessage
 
@@ -24,39 +25,40 @@ import code.model.JsonMessage
  */
 
 class HulakiListener extends CometActor with CometListener {
-  private var messages: List[String] = Nil
+  private var json: String = ""
 
   /**
    * When the component is instantiated, register as
-   * a listener with the ChatServer
+   * a listener with the ListenerManager
    */
   def registerWith = HulakiListenerManager
 
-  private def sendMessage(msg: String) = 
-	  HulakiListenerManager ! msg
+  private def sendRequest(url: String) = 
+	  HulakiListenerManager ! url
 
   /**
-   * The CometActor is an Actor, so it processes messages.
-   * In this case, we're listening for Vector[String],
+   * The CometActor is an Actor, so it processes json.
+   * In this case, we're listening for String,
    * and when we get one, update our private state
    * and reRender() the component.  reRender() will
    * cause changes to be sent to the browser.
    */
   override def lowPriority = {
-    case msg: List[String] => { 
-	    messages = msg; 
+    case jsonFromManager : String => { 
+	    json = jsonFromManager; 
+	    //SetHtml("jresponse", Text(json)) //doesn't work
 	    reRender(false)
     }
   }
 
-  private def renderMessages = <div>{messages.take(10).reverse.map(m => <li>{m}</li>)}</div>
+  private def renderJson = 
+	  json
 
   /**
-   * Put the messages in the li elements and clear
-   * any elements that have the clearable class.
+   * Put the json to comet:textarea
    */
-  def render = bind("json", "input"    -> ajaxForm(SHtml.text("", sendMessage _)),
-                            "response" -> renderMessages)
+  def render = bind("json", "input"    -> ajaxForm(SHtml.text("", sendRequest _)),
+                            "textarea" -> renderJson)
 
 
 }

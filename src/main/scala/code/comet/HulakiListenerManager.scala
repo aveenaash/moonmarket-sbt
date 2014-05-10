@@ -24,15 +24,15 @@ object HulakiListenerManager extends LiftActor with ListenerManager {
   //TODO load previous chat messages
   //val builder = new ZazzercodeRequestBuilder()
   //private var msgs = builder.getCustomers("Prayag")
-  var messages: List[String] = Nil
+  var jsonResponse: String = ""
 
   /**
    * When we update the listeners, what message do we send?
-   * We send the msgs, which is an immutable data structure,
+   * We send the json, which is an immutable data structure,
    * so it can be shared with lots of threads without any
    * danger or locking.
    */
-  def createUpdate = messages
+  def createUpdate = jsonResponse
 
   /**
    * process messages that are sent to the Actor.  In
@@ -41,24 +41,24 @@ object HulakiListenerManager extends LiftActor with ListenerManager {
    * messages, and then update all the listeners.
    */
   override def lowPriority = {
-    case msg: String => {
-	    println("message => "+msg)
-	    val request = msg
+    case clientUrl: String => {
+	    println("url => " + clientUrl)
+	    val request = clientUrl
 	    val urlRequest = url(request)
             val future = Http(urlRequest OK as.String)
 
             future onSuccess {
 	      case json =>
-		println(s"[onSuccess] response => ${msg}")
-                messages ::= json
 		println(s"[onSuccess] response => ${json}")
+                jsonResponse = json
+		println(s"[onSuccess] response => ${jsonResponse}")
                 updateListeners()
 
             }
 
             future onFailure {
 	      case exception => 
-	        messages ::= exception.getMessage()
+	        jsonResponse = exception.getMessage()
 	        println(s"${exception.getMessage()}")
 		updateListeners()
             }

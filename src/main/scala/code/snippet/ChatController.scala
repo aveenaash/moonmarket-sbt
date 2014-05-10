@@ -19,7 +19,7 @@ import code.comet.ChatServer
  * objects, singletons.  Singletons are useful if there's
  * no explicit state managed in the snippet.
  */
-object ChatIn {
+object ChatController {
 
   /**
    * The render method in this case returns a function

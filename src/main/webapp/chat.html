@@ -7,7 +7,7 @@
  
   <body data-lift-content-id="main">
     <div id="main" data-lift="surround?with=default;at=content">
-      <!-- the behavior of the div -->
+      <!-- list async messages -->
       <div data-lift="comet?type=ChatActor"> 
         chat messages (in between earth and moon)
         <ul>
@@ -17,9 +17,10 @@
         </ul>
       </div>
     
+      <!-- send chat message -->
       <div>
         <form data-lift="form.ajax">
-          <input data-lift="ChatIn" id="chatIn"/>
+          <input data-lift="ChatController" id="chatIn"/>
           <input type="submit" value="Speak to your friends in moon..."/>
         </form>
       </div>

@@ -35,5 +35,6 @@ class ChatActor extends CometActor with CometListener {
    * Put the messages in the li elements and clear
    * any elements that have the clearable class.
    */
-  def render = "li *" #> msgs & ClearClearable
+  def render = 
+	  "li *" #> msgs & ClearClearable
 }
