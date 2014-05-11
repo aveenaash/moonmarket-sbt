@@ -9,7 +9,6 @@ import net.liftweb._
 import http._
 import actor._
 import net.liftmodules.amqp.AMQPMessage
-import code.comet.Rabbit.RemoteSender
 import code.model
 
 import zazzercode.ZazzercodeRequestBuilder

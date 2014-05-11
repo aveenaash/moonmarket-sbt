@@ -18,8 +18,6 @@ import net.liftmodules.{FoBo, JQueryModule}
 import zazzercode.RestController
 
 import net.liftmodules.amqp.AMQPAddListener
-import code.comet.ChatServer
-import code.comet.Rabbit.RemoteReceiver
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -67,24 +65,16 @@ class Boot {
     LiftRules.addToPackages("code")
 
     // Build SiteMap
-    def sitemap = SiteMap(
-      Menu.i("Home")             / "index" >> User.AddUserMenusAfter, // the simple way to declare a menu
-      Menu("Comet Moon Chat")    / "chat",
-      Menu("Moon Customer")      / "customer/create",
-      Menu("Moon Customer>Edit") / "customer/edit",
-      Menu("Hulaki")             / "hulaki/hulaki",
-      Menu("Hulaki list")        / "hulaki/list",
-      Menu("Moon Market")        / "market",
-      // more complex because this menu allows anything in the
-      // /static path to be visible
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content")))
+    def entries = List(
+      Menu.i("Home")           / "index",
+      Menu("Hulaki")             / "hulaki/list")
 
-    def sitemapMutators = User.sitemapMutator
+    //def sitemapMutators = User.sitemapMutator
 
     // set the sitemap.  Note if you don't want access control for
     // each page, just comment this line out.
-    LiftRules.setSiteMapFunc(() => sitemapMutators(sitemap))
+    //LiftRules.setSiteMapFunc(() => sitemapMutators(sitemap))
+    LiftRules.setSiteMap(SiteMap(entries:_*))
 
     //Init the jQuery module, see http://liftweb.net/jquery for more information.
     LiftRules.jsArtifacts = JQueryArtifacts
@@ -118,6 +108,5 @@ class Boot {
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)
 
-    RemoteReceiver ! AMQPAddListener(ChatServer)
   }
 }

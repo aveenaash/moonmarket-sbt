@@ -46,13 +46,12 @@ class HulakiListener extends CometActor with CometListener {
   override def lowPriority = {
     case jsonFromManager : String => { 
 	    json = jsonFromManager; 
-	    //SetHtml("jresponse", Text(json)) //doesn't work
 	    reRender(false)
     }
   }
 
   private def renderJson = 
-	  json
+	  <textarea id='response' name='response' style='width: 840px; height: 450px;'>{json}</textarea>
 
   /**
    * Put the json to comet:textarea
