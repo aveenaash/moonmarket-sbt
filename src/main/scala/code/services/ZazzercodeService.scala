@@ -17,7 +17,8 @@ class ZazzercodeService {
 
              val jsObject = JsObj(("tweets", JsArray(List(
 		                                     JsObj(("2012", "VIm is great"), ("2013", "Prayag Upd is great")), 
-	                                             JsObj(("2011", "So called friend"), ("2012", "Lazarus"))
+	                                             JsObj(("2011", "So called friend"), ("2012", "Lazarus")),
+	                                             JsObj(("2009", "JVM rockstar"), ("2008", "Scala"))
 						    )
 					    )
 				    )

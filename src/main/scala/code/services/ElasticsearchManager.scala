@@ -72,7 +72,7 @@ object ElasticsearchManager {
 
   def getId(index : String ,request : String) : String = {
       val termQueryBuilder= QueryBuilders.termQuery("request",request)
-      println("Request ::::" + request)
+      println("Request => " + request)
 
       val termsFacet = FacetBuilders.termsFacet("tag").field("requestId");
 
@@ -85,28 +85,25 @@ object ElasticsearchManager {
     var fterms : TermsFacet = f.asInstanceOf[TermsFacet]
     var result : Array[SearchHit] = searchResponse.getHits().getHits()
     var id : String  =""
-    if(result.length>0)
-    {
-      if(fterms.getTotalCount()>0)
-      {
+    if(result.length>0) {
+      if(fterms.getTotalCount()>0) {
         id = result(0).getId()
         println(id)
       }
-
     }
     println(id)
-
     return id
+   }
 
-        }
-
-    def insertResponseRecord(requestdoc_ : Map[String,String],responsedoc_ : Map[String,String], index : String , type_ : String) = {
-      var client=getClient()
-      var id =getId(index,requestdoc_.get("request").mkString)
+    def insertResponseRecord(requestdoc_ : Map[String,String],
+	                     responsedoc_ : Map[String,String], 
+			     index : String, 
+			     type_ : String) = {
+      var client = getClient()
+      var id     = getId(index,requestdoc_.get("request").mkString)
       println(id)
-      if(id=="")
-      {
-        println("Insert:::"+id)
+      if (id=="") {
+	      println("Insert => "+id)
             val json = XContentFactory.jsonBuilder();
             json.startObject();
 
@@ -130,35 +127,27 @@ object ElasticsearchManager {
         indexRequestBuilder.setCreate(false).setSource(json);
         indexRequestBuilder.execute().actionGet()
 
-      }
-      else {
+      } else {
         val updateObject = new util.HashMap[String , Object]
         var map = new util.HashMap[String, String]
         map.put("responseId", "1");
         map.put("response", responsedoc_.get("response").toString());
 
-
-
 //        var reqids : Array[util.Map[String, String]] = new Array[util.Map[String, String]](2)
 //        reqids(0) = map
 //        reqids(1) = map_
-        println("Update bhitra:::" + id)
+        println("[iofo] : Update : " + id)
         updateObject.put("responses", map);
 
         val updateRequestBuilder =client.prepareUpdate(index, type_, id)
         updateRequestBuilder.setScript("ctx._source.responses += responses;")
           .setScriptParams(updateObject).execute().actionGet();
 
-
       }
-
      //println("builder => " + updateRequestBuilder.toString())
-
 
       //need to refresh indices to reflect the insertion made
       client.admin().indices().prepareRefresh().execute().actionGet()
       true
-
-
     }
 }
