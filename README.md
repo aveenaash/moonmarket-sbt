@@ -1,5 +1,5 @@
 
-![hulaki](https://github.com/iPrayag/moonmarket-sbt/raw/master/hulaki.jpg)
+![hulaki](https://github.com/iPrayag/moonmarket-sbt/raw/hulaki/hulaki.jpg)
 
 1. configure mysql/ compile and run-app
 -----------------------------
