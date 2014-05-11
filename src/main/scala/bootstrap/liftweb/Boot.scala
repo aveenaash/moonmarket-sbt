@@ -67,7 +67,7 @@ class Boot {
     // Build SiteMap
     def entries = List(
       Menu.i("Home")           / "index",
-      Menu("Hulaki")             / "hulaki/list")
+      Menu("Hulaki")             / "hulaki/create")
 
     //def sitemapMutators = User.sitemapMutator
 
