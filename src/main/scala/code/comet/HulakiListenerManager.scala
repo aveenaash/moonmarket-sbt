@@ -1,66 +1,41 @@
-package code
-package comet
+package code.comet
 
+import net.liftweb.actor._
+import net.liftweb.http._
 import dispatch._
 import scala.concurrent.{ future, promise }
 import scala.concurrent.ExecutionContext.Implicits.global
 
-import net.liftweb._
-import http._
-import actor._
-import net.liftmodules.amqp.AMQPMessage
-import code.model
 
-import zazzercode.ZazzercodeRequestBuilder
+object HulakiListenerManager extends LiftActor with ListenerManager
+{
+  private var msgs : String = ""
 
-/**
- * A singleton that provides chat features to all clients.
- * It's an Actor so it's thread-safe because only one
- * message will be processed at once.
- */
+  def createUpdate=msgs
 
-object HulakiListenerManager extends LiftActor with ListenerManager {
-  //TODO load previous chat messages
-  //val builder = new ZazzercodeRequestBuilder()
-  //private var msgs = builder.getCustomers("Prayag")
-  var jsonResponse: String = ""
-
-  /**
-   * When we update the listeners, what message do we send?
-   * We send the json, which is an immutable data structure,
-   * so it can be shared with lots of threads without any
-   * danger or locking.
-   */
-  def createUpdate = jsonResponse
-
-  /**
-   * process messages that are sent to the Actor.  In
-   * this case, we're looking for Strings that are sent
-   * to the ChatServer.  We append them to our Vector of
-   * messages, and then update all the listeners.
-   */
   override def lowPriority = {
+
     case clientUrl: String => {
-	    println("url => " + clientUrl)
-	    val request = clientUrl
-	    val urlRequest = url(request)
-            val future = Http(urlRequest OK as.String)
+      println("url => " + clientUrl)
+      val request = clientUrl
+      val urlRequest = url(request)
+      val future = Http(urlRequest OK as.String)
 
-            future onSuccess {
-	      case json =>
-		println(s"[onSuccess] response => ${json}")
-                jsonResponse = json
-		println(s"[onSuccess] response => ${jsonResponse}")
-                updateListeners()
+      future onSuccess {
+        case json =>
+          println(s"[onSuccess] response => ${json}")
+          msgs = json
+          println(s"[onSuccess] response => ${msgs}")
+          updateListeners()
 
-            }
+      }
 
-            future onFailure {
-	      case exception => 
-	        jsonResponse = exception.getMessage()
-	        println(s"${exception.getMessage()}")
-		updateListeners()
-            }
+      future onFailure {
+        case exception =>
+          msgs = exception.getMessage()
+          println(s"${exception.getMessage()}")
+          updateListeners()
+      }
     }
-  }//end of lowPriority
+  }
 }
