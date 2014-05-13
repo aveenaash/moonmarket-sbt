@@ -12,22 +12,23 @@
 
     <div>
         <form class="lift:form.ajax">
-            <input class="lift:HulakiController" id="request" style="width: 800px;"/>
+            <input class="lift:HulakiController" name="request" id="request" style="width: 800px;"/>
             <input class="btn btn-primary" type="submit" value="Request">
         </form>
     </div>
 
     <div class="lift:comet?type=HulakiListener">
-        <textarea id="response" style="width: 800px; height: 500px"></textarea>
+        <textarea name="response" id="response" style="width: 800px; height: 500px"></textarea>
 
     </div>
+    <input class="btn btn-primary" type="button" id="buttonjson" value="JSON Format">
 
 </div>
 <script id="jquery" src="/classpath/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
     // <![CDATA[
 
-    $('#response').on('change keyup paste', function() {
+    $('#buttonjson').on('click', function() {
         console.log("[info] : response keyup")
         format();
     });

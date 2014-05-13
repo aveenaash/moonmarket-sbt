@@ -13,7 +13,9 @@ class HulakiListener extends CometActor with CometListener
   def render = "textarea *" #> msgs
 
   override def lowPriority = {
-    case v : String => msgs = v; reRender()
+    case v : String => msgs = v;
+      println("msgs value =>"+msgs);
+      reRender(false)
   }
 
 }
